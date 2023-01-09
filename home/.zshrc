@@ -1,3 +1,5 @@
+# Fig pre block. Keep at the top of this file.
+[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.pre.zsh"
 export PATH="/usr/local/sbin:$PATH"
 export PYENV_ROOT=/usr/local/var/pyenv
 export PYENV_ROOT="$HOME/.pyenv"
@@ -59,3 +61,34 @@ export PYTHON_CONFIGURE_OPTS="--with-tcltk-includes='-I/usr/local/opt/tcl-tk/inc
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+ansi () {
+        echo 'Example: \\e[XXm string \\e[0m'
+        for ((i = 1; i <= 7; i++)) do
+                printf '\e[%dm%d\e[m ' $i $i
+        done
+        echo
+        echo 'Example: \\e[XXm string \\e[0m'
+        for ((i = 30; i <= 37; i++)) do
+                printf '\e[%dm%d\e[m ' $i $i
+        done
+        for ((i = 40; i <= 47; i++)) do
+                printf '\e[%dm%d\e[m ' $i $i
+        done
+        echo
+        echo 'Example: \\e[38;5;XXm string \\e[0m'
+        for ((i = 0; i < 16; i++)) do
+                for ((j = 0; j < 16; j++)) do
+                        hex=$(($i*16 + $j)) 
+                        printf '\e[38;5;%dm%03d\e[m ' $hex $hex
+                done
+                echo ""
+        done
+}
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+export SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
+
+
+export PATH="/opt/homebrew/opt/llvm/bin/:$PATH"
+
+# Fig post block. Keep at the bottom of this file.
+[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
